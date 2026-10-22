@@ -64,7 +64,8 @@ jobs:
           build_path: ${BUILD_DIR}
           extra_build_args: --provenance=false
           repo: asmodee-services/wordpress
-          create_repo: true
+          # the repository is managed by dow-infra (core/terraform.tfvars)
+          create_repo: false
           tag: << parameters.version >>-fpm-alpine,${WP_FULL_VERSION}-php${PHP_VERSION}-fpm-alpine
 
   trigger-wordpress-base:
@@ -106,12 +107,15 @@ workflows:
               # docker-wordpress-base matrix (dow/Makefile reads this list)
               version:
                 - "6.4-php8.2"
+                - "6.5-php8.2"
                 - "6.6-php8.2"
                 - "6.7-php8.2"
                 - "6.8-php8.4"
                 - "6.8-php8.5"
                 - "6.9-php8.4"
                 - "6.9-php8.5"
+                - "7.0-php8.4"
+                - "7.0-php8.5"
                 - "7.1-php8.4"
                 - "7.1-php8.5"
 
